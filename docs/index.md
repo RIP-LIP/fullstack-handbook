@@ -39,7 +39,7 @@ features:
     link: /toolkit/index
     linkText: 打开
   - title: 后端往下走
-    details: 换一张有四张表互相引用的载体。外键冲突、金额精度、迁移回滚、并发写、换数据库。
+    details: 换一张有四张表互相引用的载体。外键冲突、金额精度、迁移回滚、并发写、换数据库、幂等。
     link: /guide/deep/index
     linkText: 从这里进
 ---

@@ -96,6 +96,7 @@ export default defineConfig({
             { text: '零停机变更', link: '/guide/deep/ch06' },
             { text: '事务', link: '/guide/deep/ch07' },
             { text: '换 PostgreSQL', link: '/guide/deep/ch08' },
+            { text: '幂等', link: '/guide/deep/ch09' },
           ],
         },
       ],
