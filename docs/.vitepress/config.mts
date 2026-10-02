@@ -93,6 +93,7 @@ export default defineConfig({
             { text: '这一组讲什么', link: '/guide/deep/index' },
             { text: '数据模型', link: '/guide/deep/ch04' },
             { text: '迁移', link: '/guide/deep/ch05' },
+            { text: '零停机变更', link: '/guide/deep/ch06' },
           ],
         },
       ],
