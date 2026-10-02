@@ -38,6 +38,10 @@ features:
     details: 十几个 skill 分五类。什么时候该叫哪个，为什么按这个顺序读。
     link: /toolkit/index
     linkText: 打开
+  - title: 后端往下走
+    details: 换一张有四张表互相引用的载体。外键冲突、金额精度、迁移回滚。
+    link: /guide/deep/index
+    linkText: 从这里进
 ---
 
 ## 从哪开始
@@ -49,6 +53,7 @@ features:
 | 环境好了，直接想跑起来 | [项目启动](/guide/ch01) |
 | 写过前端，没碰过后端 | [数据存储](/guide/ch02) |
 | 主线走完了，想换个项目练手 | [完整项目](/practice/index) |
+| 单表应用做顺了，想处理多张表之间的约束 | [后端往下走](/guide/deep/index) |
 | 想让 AI 帮自己写代码，先知道该叫哪个 | [工具怎么选](/toolkit/index) |
 
 ## 主线
@@ -67,6 +72,7 @@ features:
 
 | 内容 | 是什么 |
 | --- | --- |
+| [后端往下走](/guide/deep/index) | 第二条轴。订单/库存的四张表，讲外键冲突、金额精度、迁移回滚。独立仓库，端口 3002 |
 | [完整项目](/practice/index) | 零依赖的单进程书签应用，8 个文件，复制粘贴就能跑。用来验证你真的懂了 |
 | [工具怎么选](/toolkit/index) | 十几个 skill 分五类：界面设计、实现功能、质量、并行。什么时候叫哪个 |
 | [界面设计](/toolkit/design) | 三个 skill 的分工：定方向、出稿、落代码 |
@@ -79,3 +85,5 @@ features:
 主线代码在 **[fullstack-todo-app](https://github.com/RIP-LIP/fullstack-todo-app)**，每章一个 git tag，可以 checkout 到任意一章的起点。
 
 [完整项目](/practice/index)那 8 个文件在页面里整段给出，不用 clone。
+
+「后端往下走」那组的代码在 **[fullstack-backend](https://github.com/RIP-LIP/fullstack-backend)**，同样一章一个 tag。

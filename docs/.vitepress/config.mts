@@ -47,7 +47,7 @@ export default defineConfig({
     // 算下来 7 项在最窄的桌面宽度会溢出，所以「速查」只放侧边栏和页脚。
     nav: [
       { text: '准备', link: '/guide/setup', activeMatch: '^/guide/(setup|basics|intro)' },
-      { text: '主线', link: '/guide/ch01', activeMatch: '^/guide/ch' },
+      { text: '主线', link: '/guide/ch01', activeMatch: '^/guide/(ch|deep)' },
       { text: '动手做', link: '/practice/index' },
       { text: '工具', link: '/toolkit/index', activeMatch: '^/toolkit/' },
       { text: '遇到问题', link: '/howto/index', activeMatch: '^/howto/' },
@@ -83,6 +83,16 @@ export default defineConfig({
             { text: '项目启动', link: '/guide/ch01' },
             { text: '数据存储', link: '/guide/ch02' },
             { text: '前端交互', link: '/guide/ch03' },
+          ],
+        },
+        {
+          // 另一条轴：用订单/库存讲表之间的约束、迁移和并发。
+          // 独立分组是为了不和主线混在一起——两者的前置条件不一样。
+          text: '后端往下走',
+          items: [
+            { text: '这一组讲什么', link: '/guide/deep/index' },
+            { text: '数据模型', link: '/guide/deep/ch04' },
+            { text: '迁移', link: '/guide/deep/ch05' },
           ],
         },
       ],
@@ -134,7 +144,7 @@ export default defineConfig({
     lastUpdatedText: '最后更新',
 
     footer: {
-      message: '代码在 github.com/RIP-LIP/fullstack-todo-app',
+      message: '代码在 github.com/RIP-LIP/fullstack-todo-app（主线）与 fullstack-backend（后端往下走）',
       copyright: 'MIT',
     },
   },
