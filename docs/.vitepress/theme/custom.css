@@ -1,0 +1,297 @@
+/**
+ * 视觉层。设计方向：网络调试台。
+ *
+ * 颜色按 HTTP 状态码语义分配，不是装饰 —— 绿=2xx、蓝=结构/链接、
+ * 琥珀=提示、红=失败。代码块左右两侧的竖线就是这个语义的颜色。
+ *
+ * 全站唯一的花体是等宽字体，用在代码和标签上。标题和正文用系统无衬线，
+ * 靠字距而不是字号建立层级。
+ */
+
+:root {
+  --hp-paper: #fafaf8;
+  --hp-ink: #14161a;
+  --hp-wire: #2b5fd9;
+  --hp-signal: #b45309;
+  --hp-fail: #b42318;
+  --hp-ok: #15803d;
+
+  --vp-c-bg: var(--hp-paper);
+  --vp-c-bg-alt: #f2f2ef;
+  --vp-c-bg-elv: #ffffff;
+  --vp-c-bg-soft: #f2f2ef;
+
+  --vp-c-text-1: var(--hp-ink);
+  --vp-c-text-2: #4a4e57;
+  --vp-c-text-3: #7a7f8a;
+
+  --vp-c-brand-1: var(--hp-wire);
+  --vp-c-brand-2: #1f4bb5;
+  --vp-c-brand-3: #2b5fd9;
+  --vp-c-brand-soft: rgba(43, 95, 217, 0.12);
+
+  --vp-c-tip-1: var(--hp-signal);
+  --vp-c-tip-2: #8a3f07;
+  --vp-c-tip-3: #b45309;
+  --vp-c-tip-soft: rgba(180, 83, 9, 0.1);
+
+  --vp-c-danger-1: var(--hp-fail);
+  --vp-c-danger-2: #8f1c13;
+  --vp-c-danger-3: #b42318;
+  --vp-c-danger-soft: rgba(180, 35, 24, 0.1);
+
+  --vp-c-divider: #e3e3df;
+  --vp-code-block-bg: #14161a;
+  --vp-code-copy-code-bg: #23262c;
+
+  --vp-font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --vp-font-family-mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular,
+    Consolas, monospace;
+
+  --vp-layout-max-width: 1440px;
+}
+
+.dark {
+  --hp-paper: #101215;
+  --hp-ink: #e6e6e3;
+  --hp-wire: #7aa2f7;
+  --hp-signal: #e3a008;
+  --hp-fail: #f87171;
+  --hp-ok: #4ade80;
+
+  --vp-c-bg: var(--hp-paper);
+  --vp-c-bg-alt: #16191d;
+  --vp-c-bg-elv: #1b1e23;
+  --vp-c-bg-soft: #16191d;
+
+  --vp-c-text-1: var(--hp-ink);
+  --vp-c-text-2: #b0b4bc;
+  --vp-c-text-3: #7f858f;
+
+  --vp-c-brand-1: var(--hp-wire);
+  --vp-c-brand-2: #a5c0ff;
+  --vp-c-brand-3: #7aa2f7;
+  --vp-c-brand-soft: rgba(122, 162, 247, 0.14);
+
+  --vp-c-tip-1: var(--hp-signal);
+  --vp-c-tip-2: #f0b849;
+  --vp-c-tip-3: #e3a008;
+  --vp-c-tip-soft: rgba(227, 160, 8, 0.12);
+
+  --vp-c-danger-1: var(--hp-fail);
+  --vp-c-danger-2: #fca5a5;
+  --vp-c-danger-3: #f87171;
+  --vp-c-danger-soft: rgba(248, 113, 113, 0.12);
+
+  --vp-c-divider: #262a30;
+}
+
+/* ---------- 排版：靠字距建立层级，不靠字号堆叠 ---------- */
+
+.vp-doc h1 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.vp-doc h2 {
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--vp-c-divider);
+}
+
+.vp-doc h3 {
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+.vp-doc p,
+.vp-doc li {
+  line-height: 1.75;
+}
+
+/* ---------- 签名元素：请求面板 ---------- */
+
+/*
+ * 「请求面板」：容器 ::: request 里放两个代码块，
+ * 第一个渲染成左栏（要敲的命令），第二个渲染成右栏（真实响应）。
+ * 栏标题和竖线颜色由内容决定，用 CSS 的 nth-child 区分左右。
+ */
+.vp-doc .request-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 1.5rem 0;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* 每一栏是 VitePress 的代码块容器，背景和内边距统一压平 */
+.vp-doc .request-panel > div[class*='language-'] {
+  margin: 0;
+  border-radius: 0;
+  border-left: 3px solid transparent;
+  background: var(--vp-c-bg-soft);
+}
+
+/* 左栏：命令。蓝色 = 结构 */
+.vp-doc .request-panel > div:nth-of-type(1) {
+  border-left-color: var(--hp-wire);
+}
+
+/* 右栏：响应。绿色 = 成功 */
+.vp-doc .request-panel > div:nth-of-type(2) {
+  border-left-color: var(--hp-ok);
+}
+
+/*
+ * 去掉代码块自带的高亮背景和横向滚动条 ——
+ * 两栏并排时宽度有限，长行折行比横向滚动好读。
+ */
+.vp-doc .request-panel > div[class*='language-'] pre {
+  margin: 0;
+  padding: 0.875rem 1rem;
+  background: transparent;
+  overflow-x: visible;
+}
+
+.vp-doc .request-panel > div[class*='language-'] pre code {
+  display: block;
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  background: transparent;
+}
+
+/*
+ * 不改 .line 的布局 —— shiki 靠它逐行排版，动它会让后续内容错位。
+ * 长行允许横向滚动，代价是这一栏窄；宁可滚动也不破坏结构。
+ */
+.vp-doc .request-panel > div[class*='language-'] pre {
+  overflow-x: auto;
+}
+
+/* 复制按钮在这个布局里会挡住内容，隐藏 */
+.vp-doc .request-panel > div[class*='language-'] button.copy,
+.vp-doc .request-panel > div[class*='language-'] span.lang {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .vp-doc .request-panel {
+    grid-template-columns: 1fr;
+  }
+  .vp-doc .request-panel > div:nth-of-type(1) {
+    border-bottom: 1px solid var(--vp-c-divider);
+  }
+}
+
+/* ---------- 章号：等宽大字，承载真实的阅读顺序 ---------- */
+
+.vp-doc .chapter-no {
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  color: var(--vp-c-text-3);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+/* ---------- 标签行：等宽小字，像终端里的输出 ---------- */
+
+.vp-doc .meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0 0 1.5rem;
+}
+
+.vp-doc .meta-row > * {
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.75rem;
+  padding: 0.125rem 0.5rem;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 3px;
+  color: var(--vp-c-text-2);
+}
+
+/* ---------- 表格：等宽表头，读起来像终端输出 ---------- */
+
+.vp-doc table {
+  font-size: 0.9375rem;
+}
+
+.vp-doc th {
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--vp-c-text-3);
+}
+
+/* ---------- 首页 Hero：克制。不堆统计数字 ---------- */
+
+/*
+ * 标题保持系统无衬线（和正文同族），靠字距和字重建立层级。
+ * 等宽字体是全站唯一允许的花体，只用在代码和标签上 ——
+ * 中文没有等宽字形，套上去会掉回系统衬线，反而更难看。
+ */
+.VPHome .VPHero .name {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.VPHome .VPHero .text {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.VPHome .VPFeatures .VPFeature {
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 6px;
+  background: var(--vp-c-bg-soft);
+}
+
+.VPHome .VPFeatures .VPFeature:hover {
+  border-color: var(--hp-wire);
+}
+
+/* ---------- 提示框：标题前缀一个小方块，标记语义色 ---------- */
+
+.vp-doc .custom-block {
+  border: none;
+  border-left-width: 3px;
+  border-radius: 0 4px 4px 0;
+}
+
+.vp-doc .custom-block.tip {
+  border-left-color: var(--hp-signal);
+}
+.vp-doc .custom-block.warning {
+  border-left-color: var(--hp-signal);
+}
+.vp-doc .custom-block.danger {
+  border-left-color: var(--hp-fail);
+}
+.vp-doc .custom-block.info {
+  border-left-color: var(--hp-wire);
+}
+
+/* ---------- 无障碍：焦点可见，尊重减弱动效 ---------- */
+
+:focus-visible {
+  outline: 2px solid var(--hp-wire);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

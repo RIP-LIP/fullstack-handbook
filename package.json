@@ -1,0 +1,23 @@
+{
+  "name": "fullstack-handbook",
+  "version": "0.1.0",
+  "private": true,
+  "description": "用一个任务清单应用，从空目录走到前后端跑通",
+  "keywords": [
+    "vitepress",
+    "fullstack",
+    "tutorial",
+    "chinese-docs",
+    "教程"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "markdown-it-container": "^4.0.0",
+    "vitepress": "^1.6.4"
+  }
+}
