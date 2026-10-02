@@ -21,6 +21,17 @@ npm run dev:api     # 终端 1
 npm run dev:web     # 终端 2
 ```
 
+数据存在哪：
+
+```
+apps/api/data/app.db          数据库本体
+apps/api/data/app.db-wal      WAL 模式的正常工作文件
+apps/api/data/app.db-shm      同上
+```
+
+**`app.db` 不在 git 里**（`.gitignore` 加了 `apps/api/data/`），每个读者自己生成一份。
+想彻底清空就 `npm run db:reset`，然后重启后端。见 [数据存储](/guide/ch02)。
+
 ## 看接口
 
 | 命令 | 作用 | 是否改动数据 |
@@ -84,10 +95,3 @@ npm install      # 依赖可能变过，装一次
 | `500` | 服务端自己出错 | 看后端终端的输出 |
 
 **`fetch` 抛异常**（不是状态码）：请求根本没发出去。后端没起、代理没配、地址打错。和 500 是两件事。
-
-## 这份速查表没写的
-
-- 数据库文件在哪：`apps/api/data/app.db`
-- 想清空重来：`npm run db:reset`，然后重启后端
-
-去 [数据存储](/guide/ch02) 看数据到底存进哪了。
