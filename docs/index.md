@@ -74,7 +74,6 @@ features:
 | [保证它是对的](/toolkit/quality) | TDD、排障四阶段、验证门禁、两条轴审查 |
 | [命令速查表](/reference/cheatsheet) | 按「你要做什么」分组，每条标明会不会改动数据 |
 | [场景索引](/howto/index) | 按你遇到的具体麻烦查 |
-
 ## 代码
 
 主线代码在 **[fullstack-todo-app](https://github.com/RIP-LIP/fullstack-todo-app)**，每章一个 git tag，可以 checkout 到任意一章的起点。

@@ -89,7 +89,12 @@ export default defineConfig({
       '/practice/': [
         {
           text: '动手做',
-          items: [{ text: '完整项目', link: '/practice/index' }],
+          items: [
+            { text: '完整项目', link: '/practice/index' },
+            { text: '建文件', link: '/practice/code' },
+            { text: '跑起来并验证', link: '/practice/verify' },
+            { text: '改成你自己的应用', link: '/practice/extend' },
+          ],
         },
       ],
       '/toolkit/': [
