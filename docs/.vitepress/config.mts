@@ -94,6 +94,7 @@ export default defineConfig({
             { text: '数据模型', link: '/guide/deep/ch04' },
             { text: '迁移', link: '/guide/deep/ch05' },
             { text: '零停机变更', link: '/guide/deep/ch06' },
+            { text: '事务', link: '/guide/deep/ch07' },
           ],
         },
       ],

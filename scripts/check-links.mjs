@@ -9,6 +9,9 @@
  *   2. 带 `#锚点` 的链接，目标页面上真的有那个 id
  *   3. 不存在「只有 /guide/ 这种不完整的路径」
  *
+ * 顺带扫一遍源文件里的 U+FFFD 乱码。链接全对但正文里有乱码，
+ * 页面照样能发布出去，所以它不归死链管，但一样是进不了仓库的东西。
+ *
  * 用法：
  *   npm run build && npm run check:links
  *
@@ -141,6 +144,55 @@ for (const file of htmlFiles) {
       }
     }
   }
+}
+
+/**
+ * 乱码扫描。
+ *
+ * U+FFFD（�）是「这里本来有个字符，但按错误的编码解不出来了」。
+ * 它进仓库的路径通常是：某次用会写 BOM 的方式存盘，或某次复制粘贴跨了编码。
+ *
+ * 单看一个文件不一定能发现——中文正文里夹一个 � 不影响构建，
+ * 不影响链接检查，读的人也可能滑过去。真正的问题是它会传播：
+ * 一段被污染的注释被复制到别处，污染就跟着走。
+ *
+ * 所以查的是**源文件**，不是 dist。dist 里当然也有，但那里已经定位不到
+ * 是哪一次编辑写进去的了。
+ */
+function scanMojibake() {
+  const docs = join(root, '..', 'docs')
+  const found = []
+
+  const walk = (dir) => {
+    for (const entry of readdirSync(dir)) {
+      if (entry === '.vitepress' || entry === 'node_modules') continue
+      const full = join(dir, entry)
+      if (statSync(full).isDirectory()) {
+        walk(full)
+        continue
+      }
+      if (!/\.(md|ts|mts|js|mjs)$/.test(entry)) continue
+      const lines = readFileSync(full, 'utf8').split('\n')
+      lines.forEach((line, i) => {
+        if (line.includes('�')) {
+          found.push({ file: full.slice(docs.length + 1), line: i + 1, text: line.trim() })
+        }
+      })
+    }
+  }
+
+  walk(docs)
+  return found
+}
+
+const mojibake = scanMojibake()
+if (mojibake.length > 0) {
+  console.error(`\n发现 ${mojibake.length} 处乱码（U+FFFD）：\n`)
+  for (const m of mojibake) {
+    console.error(`  ${m.file}:${m.line}`)
+    console.error(`      ${m.text}\n`)
+  }
+  process.exit(1)
 }
 
 console.log(`检查 ${htmlFiles.length} 个页面，${checked} 条站内链接（其中 ${anchors} 条带锚点）`)
