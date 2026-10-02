@@ -95,6 +95,7 @@ export default defineConfig({
             { text: '迁移', link: '/guide/deep/ch05' },
             { text: '零停机变更', link: '/guide/deep/ch06' },
             { text: '事务', link: '/guide/deep/ch07' },
+            { text: '换 PostgreSQL', link: '/guide/deep/ch08' },
           ],
         },
       ],
