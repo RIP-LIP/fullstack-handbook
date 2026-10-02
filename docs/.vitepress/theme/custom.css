@@ -93,9 +93,12 @@
  * 顶栏左侧这个按钮做两件事：折叠 / 展开侧边栏。
  * 图标是「侧栏面板」的形状（一个带竖线的方框），和「折叠」的动作对得上，
  * 不再出现「长得像菜单、点了却回首页」的错位。
+ *
+ * display: none 是默认值，桌面宽度下才显示（见下面的 media query）——
+ * 窄屏有 VitePress 自带的汉堡按钮，不需要两个。
  */
 .hp-sidebar-toggle {
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   width: 32px;
@@ -126,14 +129,21 @@
  * 关键：VitePress 靠 --vp-sidebar-width 计算正文左边距，
  * 只藏元素会让正文被压在下面。这个变量定义在 .VPLayout 上，
  * 所以 class 由 theme/index.ts 挂在 .VPLayout 上。
+ *
+ * 只在桌面宽度生效：960px 以下 VitePress 自己就用抽屉式侧栏，
+ * 配一个自带的汉堡按钮。这时候再插一个按钮只会和它打架。
  */
-.VPLayout.hp-sidebar-collapsed .VPSidebar {
-  display: none;
-}
-
 @media (min-width: 960px) {
+  .VPLayout.hp-sidebar-collapsed .VPSidebar {
+    display: none;
+  }
+
   .VPLayout.hp-sidebar-collapsed {
     --vp-sidebar-width: 0px;
+  }
+
+  .hp-sidebar-toggle {
+    display: flex;
   }
 }
 
