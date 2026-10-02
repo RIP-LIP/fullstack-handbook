@@ -87,6 +87,56 @@
   --vp-c-divider: #262a30;
 }
 
+/* ---------- 侧边栏折叠按钮 ---------- */
+
+/*
+ * 顶栏左侧这个按钮做两件事：折叠 / 展开侧边栏。
+ * 图标是「侧栏面板」的形状（一个带竖线的方框），和「折叠」的动作对得上，
+ * 不再出现「长得像菜单、点了却回首页」的错位。
+ */
+.hp-sidebar-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin-right: 8px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--vp-c-text-2);
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.hp-sidebar-toggle:hover {
+  background: var(--vp-c-bg-soft);
+  border-color: var(--vp-c-divider);
+  color: var(--vp-c-text-1);
+}
+
+.hp-sidebar-toggle svg {
+  width: 18px;
+  height: 18px;
+}
+
+/*
+ * 折叠态：侧边栏收起。
+ *
+ * 关键：VitePress 靠 --vp-sidebar-width 计算正文左边距，
+ * 只藏元素会让正文被压在下面。这个变量定义在 .VPLayout 上，
+ * 所以 class 由 theme/index.ts 挂在 .VPLayout 上。
+ */
+.VPLayout.hp-sidebar-collapsed .VPSidebar {
+  display: none;
+}
+
+@media (min-width: 960px) {
+  .VPLayout.hp-sidebar-collapsed {
+    --vp-sidebar-width: 0px;
+  }
+}
+
 /* ---------- 排版：靠字距建立层级，不靠字号堆叠 ---------- */
 
 .vp-doc h1 {

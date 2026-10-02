@@ -17,10 +17,6 @@ export default defineConfig({
   lastUpdated: true,
   appearance: true,
 
-  // 第2、3 章已在前文和首页引用，但正文要等风格确认后才写。
-  // 写完这两章就把下面这两行删掉，让死链检查恢复成默认的严格模式。
-  ignoreDeadLinks: [/^\/guide\/ch0[23]$/],
-
   head: [['link', { rel: 'icon', href: '/logo.svg' }]],
 
   markdown: {
@@ -42,11 +38,14 @@ export default defineConfig({
   },
 
   themeConfig: {
-    logo: '/logo.svg',
+    // 顶栏左侧不放 logo：那里是侧边栏折叠按钮（见 theme/index.ts）。
+    // 站点名由首页 Hero 承担。
     siteTitle: false,
+    logo: undefined,
 
     nav: [
-      { text: '主线', link: '/guide/intro', activeMatch: '^/guide/' },
+      { text: '准备', link: '/guide/setup', activeMatch: '^/guide/(setup|basics|intro)' },
+      { text: '主线', link: '/guide/ch01', activeMatch: '^/guide/ch' },
       { text: '遇到问题', link: '/howto/index', activeMatch: '^/howto/' },
       { text: '命令速查', link: '/reference/cheatsheet', activeMatch: '^/reference/' },
       { text: 'GitHub', link: 'https://github.com/RIP-LIP/fullstack-handbook' },
@@ -73,11 +72,19 @@ export default defineConfig({
     sidebar: {
       '/guide/': [
         {
-          text: '主线',
+          text: '全栈手记',
           items: [
             { text: '写在开头', link: '/guide/intro' },
             {
-              text: '🟦 第一部分 · 跑起来',
+              text: '🧰 准备',
+              collapsed: false,
+              items: [
+                { text: '第0章 先把环境配好', link: '/guide/setup' },
+                { text: '第0章续 动手前先知道这四件事', link: '/guide/basics' },
+              ],
+            },
+            {
+              text: '🟦 主线',
               collapsed: false,
               items: [
                 { text: '第1章 跑起来，看懂一次请求', link: '/guide/ch01' },
