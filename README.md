@@ -13,11 +13,24 @@ npm install
 npm run dev        # http://localhost:5173
 ```
 
-构建：
+构建和检查：
 
 ```bash
-npm run build      # 产物在 docs/.vitepress/dist
+npm run build         # 产物在 docs/.vitepress/dist
 npm run preview
+npm run verify        # = build + check:links
+```
+
+### 链接检查
+
+VitePress 自带的死链检查**只管路径，不管锚点**。写 `[x](/a#不存在的节)` 构建照样通过，点过去才发现跳错。
+
+`npm run check:links` 补这一块，读构建产物校验三件事：站内目标页面存在、`#锚点` 在目标页面上真有那个 id、静态资源文件存在。失效则退出码 1 并逐条打印。
+
+**Pages 部署流水线已经接上这一步**，坏链接不会上线。改完内容本地跑一次：
+
+```bash
+npm run verify
 ```
 
 ## 目录结构
@@ -48,6 +61,8 @@ docs/
     config.mts        站点唯一配置源
     theme/
       custom.css      全部视觉改写只动这个文件
+scripts/
+  check-links.mjs     站内锚点 / 静态资源检查
 ```
 
 ## 写作规范

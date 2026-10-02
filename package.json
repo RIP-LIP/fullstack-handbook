@@ -14,7 +14,9 @@
   "scripts": {
     "dev": "vitepress dev docs",
     "build": "vitepress build docs",
-    "preview": "vitepress preview docs"
+    "preview": "vitepress preview docs",
+    "check:links": "node scripts/check-links.mjs",
+    "verify": "npm run build && npm run check:links"
   },
   "devDependencies": {
     "markdown-it-container": "^4.0.0",

@@ -25,6 +25,9 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      # VitePress 的死链检查只管路径不管锚点。这一步专查 #锚点，
+      # 失效就直接让构建失败，不会带着坏链接上线。
+      - run: npm run check:links
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
