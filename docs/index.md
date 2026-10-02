@@ -53,7 +53,8 @@ features:
 | 环境好了，直接想跑起来 | [项目启动](/guide/ch01) |
 | 写过前端，没碰过后端 | [数据存储](/guide/ch02) |
 | 主线走完了，想换个项目练手 | [完整项目](/practice/index) |
-| 单表应用做顺了，想处理多张表之间的约束 | [后端往下走](/guide/deep/index) || 想让 AI 帮自己写代码，先知道该叫哪个 | [工具怎么选](/toolkit/index) |
+| 单表应用做顺了，想处理多张表之间的约束 | [后端往下走](/guide/deep/index) |
+| 想让 AI 帮自己写代码，先知道该叫哪个 | [工具怎么选](/toolkit/index) |
 
 ## 主线
 
@@ -79,6 +80,7 @@ features:
 | [保证它是对的](/toolkit/quality) | TDD、排障四阶段、验证门禁、两条轴审查 |
 | [命令速查表](/reference/cheatsheet) | 按「你要做什么」分组，每条标明会不会改动数据 |
 | [场景索引](/howto/index) | 按你遇到的具体麻烦查 |
+
 ## 代码
 
 主线代码在 **[fullstack-todo-app](https://github.com/RIP-LIP/fullstack-todo-app)**，每章一个 git tag，可以 checkout 到任意一章的起点。

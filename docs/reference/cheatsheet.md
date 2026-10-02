@@ -83,6 +83,42 @@ git checkout v0.1
 npm install      # 依赖可能变过，装一次
 ```
 
+## 后端往下走（另一个仓，端口 3002）
+
+这一组命令在 `fullstack-backend` 仓库根目录执行。那个项目和上面几节的项目**是两个独立仓库**，端口不冲突，可以同时开着。
+
+| 命令 | 作用 | 是否改动数据 |
+| --- | --- | :-: |
+| `npm run dev:api` | 起后端（**3002**） | 否 |
+| `npm test` | 跑测试，跑在临时目录上 | 只动临时目录 |
+| `npm run db:reset` | **删掉数据库文件**，下次启动重建 | ⚠️ 删数据 |
+| `node scripts/verify-tag.mjs v1.3` | 复现某个 tag：导出、装依赖、跑测试、起服务、跑该章验证命令 | 会动临时目录，短暂占一个端口 |
+| `node scripts/backfill.mjs --status` | 只看还剩多少行没补 | 否 |
+| `node scripts/backfill.mjs --batch=1000` | 分批补，每批一个事务 | ⚠️ 会改数据 |
+| `curl -X POST .../api/orders -d '{...}'` | 建一笔订单 | ⚠️ 建单 + **扣库存** |
+| `curl -X POST .../api/orders/1/transition -d '{"to":"paid"}'` | 走一次状态转移 | ⚠️ 会改数据 |
+| `docker compose up -d` | 起 PostgreSQL 容器（当前代码还没连它） | 只新建 `fullstack-backend-db` 这一个容器 |
+| `docker compose ps` | 看库的状态，看到 healthy 才算好 | 否 |
+| `docker compose down` | 停掉。加 `-v` 连数据卷一起删 | 否（加 `-v` 则 ⚠️ 删数据） |
+
+```bash
+# 端口都在这一章
+3001    主线后端
+3002    后端往下走的后端
+5432    PostgreSQL（只在容器里映射到本机）
+```
+
+数据库在哪：
+
+```
+apps/api/data/app.db          SQLite 数据库本体
+apps/api/data/app.db-wal      WAL 模式的正常工作文件
+apps/api/data/app.db-shm      同上
+```
+
+`app.db` 不在 git 里（`.gitignore` 加了 `apps/api/data/`），每个读者自己生成一份。
+想彻底清空就 `npm run db:reset`，然后重启后端。
+
 ## 错误码对照
 
 | 状态码 | 含义 | 常见原因 |
@@ -92,6 +128,16 @@ npm install      # 依赖可能变过，装一次
 | `204` | 成功，无响应体 | DELETE 正常返回 |
 | `400` | 请求有问题 | 校验不过，或 JSON 格式错 |
 | `404` | 找不到 | 路径写错、代理没配、id 不存在 |
+| `409` | 状态冲突 | 唯一键撞了、目标还被别人引用、要买的量超过库存、状态跳不过去 |
 | `500` | 服务端自己出错 | 看后端终端的输出 |
+
+**`409` 不是一个错误，是一类。** 后端往下走那一组有四个语义码，都是「请求本身没问题，但此刻做这件事会撞上库里的现状」：
+
+| 码 | 什么时候 | 客户端该做什么 |
+| --- | --- | --- |
+| `PRODUCT_SKU_TAKEN` | 这个 SKU 已经有人用了 | 换一个 SKU |
+| `PRODUCT_IN_USE` | 这个商品已经被订单引用，删不掉 | 先处理掉那些订单 |
+| `OUT_OF_STOCK` | 要买的量超过当前库存 | 改数量，或者等补货 |
+| `ORDER_STATE_INVALID` | 订单现在这个状态不能这么跳 | 看报错信息里「现在可以变成」那一段 |
 
 **`fetch` 抛异常**（不是状态码）：请求根本没发出去。后端没起、代理没配、地址打错。和 500 是两件事。
