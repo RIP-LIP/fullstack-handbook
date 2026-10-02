@@ -6,7 +6,7 @@ import container from 'markdown-it-container'
  */
 export default defineConfig({
   title: '全栈手记',
-  description: '用一个任务清单应用，从空目录走到前后端跑通。每章都能跑，每步都能验证。',
+  description: '从空目录到一个能跑的应用。每章都能跑，每步都能验证，每个示例都实跑核对过。',
 
   // GitHub Pages 项目页：仓库名就是 base
   base: '/fullstack-handbook/',
@@ -43,11 +43,14 @@ export default defineConfig({
     siteTitle: false,
     logo: undefined,
 
+    // 顶栏项数有上限：.VPNavBarMenu 是 flex 且不换行，768px 以下才折叠成汉堡。
+    // 算下来 7 项在最窄的桌面宽度会溢出，所以「速查」只放侧边栏和页脚。
     nav: [
       { text: '准备', link: '/guide/setup', activeMatch: '^/guide/(setup|basics|intro)' },
       { text: '主线', link: '/guide/ch01', activeMatch: '^/guide/ch' },
+      { text: '动手做', link: '/practice/index' },
+      { text: '三个工具', link: '/toolkit/index', activeMatch: '^/toolkit/' },
       { text: '遇到问题', link: '/howto/index', activeMatch: '^/howto/' },
-      { text: '命令速查', link: '/reference/cheatsheet', activeMatch: '^/reference/' },
       { text: 'GitHub', link: 'https://github.com/RIP-LIP/fullstack-handbook' },
     ],
 
@@ -80,6 +83,23 @@ export default defineConfig({
             { text: '项目启动', link: '/guide/ch01' },
             { text: '数据存储', link: '/guide/ch02' },
             { text: '前端交互', link: '/guide/ch03' },
+          ],
+        },
+      ],
+      '/practice/': [
+        {
+          text: '动手做',
+          items: [{ text: '完整项目', link: '/practice/index' }],
+        },
+      ],
+      '/toolkit/': [
+        {
+          text: '三个工具',
+          items: [
+            { text: '怎么分工', link: '/toolkit/index' },
+            { text: '界面设计', link: '/toolkit/design' },
+            { text: '工程流程', link: '/toolkit/workflow' },
+            { text: '多 Agent 编排', link: '/toolkit/agents' },
           ],
         },
       ],

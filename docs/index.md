@@ -4,14 +4,14 @@ layout: home
 hero:
   name: 全栈手记
   text: 从空目录到一个能跑的应用
-  tagline: 用任务清单做主线，每章推进一个功能。
+  tagline: 用任务清单做主线，每章推进一个功能，每个示例都实跑核对过。
   actions:
     - theme: brand
       text: 从环境配置开始
       link: /guide/setup
     - theme: alt
-      text: 跳过环境，直接看主线
-      link: /guide/ch01
+      text: 直接看一个完整项目
+      link: /practice/index
 
 features:
   - title: 环境配置
@@ -34,10 +34,10 @@ features:
     details: 加载中、出错、空数据都有界面；乐观更新失败怎么回滚。
     link: /guide/ch03
     linkText: 看这一篇
-  - title: 命令速查表
-    details: 按「你要做什么」分组，每条标明会不会改动数据。
-    link: /reference/cheatsheet
-    linkText: 打开速查表
+  - title: 完整项目
+    details: 一个书签应用。零依赖，一个进程，八个文件，整个复制粘贴就能跑。
+    link: /practice/index
+    linkText: 打开
 ---
 
 ## 从哪开始
@@ -48,21 +48,34 @@ features:
 | 环境好了，但没搞懂前后端为什么分开 | [基础概念](/guide/basics) |
 | 环境好了，直接想跑起来 | [项目启动](/guide/ch01) |
 | 写过前端，没碰过后端 | [数据存储](/guide/ch02) |
+| 主线走完了，想换个项目练手 | [完整项目](/practice/index) |
+| 想看设计方向和工程流程怎么定 | [三个工具怎么分工](/toolkit/index) |
 
-## 全部章节
+## 主线
 
-| 章节 | 做完之后 | 状态 |
-| --- | --- | :-: |
-| [环境配置](/guide/setup) | Node 装好，依赖装完，一个后端服务跑起来 | ✅ |
-| [基础概念](/guide/basics) | 能解释端口、状态码、JSON，以及代码跑在哪 | ✅ |
-| [项目启动](/guide/ch01) | 两个服务同时跑，一次请求穿过代理 | ✅ |
-| [数据存储](/guide/ch02) | 数据落库，一份校验规则两端共用 | ✅ |
-| [前端交互](/guide/ch03) | 四种状态都有界面，乐观更新失败能回滚 | ✅ |
-| [命令速查表](/reference/cheatsheet) | 常用的命令按用途分组 | ✅ |
-| [场景索引](/howto/index) | 按你遇到的具体麻烦查 | 🚧 |
+| 章节 | 做完之后 |
+| --- | --- |
+| [环境配置](/guide/setup) | Node 装好，依赖装完，一个后端服务跑起来 |
+| [基础概念](/guide/basics) | 能解释端口、状态码、JSON，以及代码跑在哪 |
+| [项目启动](/guide/ch01) | 两个服务同时跑，一次请求穿过代理 |
+| [数据存储](/guide/ch02) | 数据落库，一份校验规则两端共用 |
+| [前端交互](/guide/ch03) | 四种状态都有界面，乐观更新失败能回滚 |
 
-后面几篇还没写，章节划分在 [场景索引](/howto/index) 里，标了「待补」的不要照着做。
+**任务清单不是重点。** 每章最后都有一节「哪些是通用的」，明确切分哪些代码要重写、哪些可以直接搬走。
+
+## 主线之外
+
+| 内容 | 是什么 |
+| --- | --- |
+| [完整项目](/practice/index) | 零依赖的单进程书签应用，8 个文件，复制粘贴就能跑。用来验证你真的懂了 |
+| [三个工具怎么分工](/toolkit/index) | 界面设计、工程流程、多 Agent 编排。各自管什么、为什么按这个顺序读 |
+| [命令速查表](/reference/cheatsheet) | 按「你要做什么」分组，每条标明会不会改动数据 |
+| [场景索引](/howto/index) | 按你遇到的具体麻烦查 |
+
+登录与会话、换 PostgreSQL、部署与 CI、权限与多用户这几篇**还没写**。站内标了「待写」「待补」的不要照着做。
 
 ## 代码
 
-教程里所有代码在 **[fullstack-todo-app](https://github.com/RIP-LIP/fullstack-todo-app)**，每章一个 git tag，可以 checkout 到任意一章的起点。
+主线代码在 **[fullstack-todo-app](https://github.com/RIP-LIP/fullstack-todo-app)**，每章一个 git tag，可以 checkout 到任意一章的起点。
+
+[完整项目](/practice/index)那 8 个文件在页面里整段给出，不用 clone。
