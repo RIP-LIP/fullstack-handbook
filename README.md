@@ -27,10 +27,20 @@ docs/
   index.md            首页
   guide/              主线篇（线性）
     intro.md            写在开头
+    setup.md            环境配置
+    basics.md           基础概念
     ch01.md             项目启动
     ch02.md             数据存储
     ch03.md             前端交互
-  howto/              场景篇（按问题查）
+  practice/           实践篇
+    index.md            完整项目：一个书签应用（零依赖，8 个文件）
+  toolkit/            工具篇
+    index.md            总览：按处境查
+    design.md           界面设计
+    build.md            实现功能
+    quality.md          保证它是对的
+    parallel.md         拆开并行
+  howto/              场景索引（按问题查）
     index.md
   reference/          速查
     cheatsheet.md
@@ -51,6 +61,8 @@ docs/
 - 排障只给顺序，不给零散技巧
 - 时效性数据标具体日期，能删就删
 - **禁止自我标榜句**（「我们只讲 X 不讲 Y」「这份教程解决什么」这类）
+- **禁止把计划写进产物**——没有「待写」「待补」「接下来会写」这类字样。读者看到的是做好的东西，不是施工图。范围没覆盖到的地方就不提，别在页面上挂个占位
+- **命令和响应必须是实跑的**。凭印象编的示例比没有更糟
 
 `config.mts` 没有 `ignoreDeadLinks`，死链检查是严格模式。**新增页面后要同步改三处导航**（侧边栏、首页目录、顶栏），漏一处构建就会失败。
 
