@@ -49,7 +49,7 @@ export default defineConfig({
       { text: '准备', link: '/guide/setup', activeMatch: '^/guide/(setup|basics|intro)' },
       { text: '主线', link: '/guide/ch01', activeMatch: '^/guide/ch' },
       { text: '动手做', link: '/practice/index' },
-      { text: '三个工具', link: '/toolkit/index', activeMatch: '^/toolkit/' },
+      { text: '工具', link: '/toolkit/index', activeMatch: '^/toolkit/' },
       { text: '遇到问题', link: '/howto/index', activeMatch: '^/howto/' },
       { text: 'GitHub', link: 'https://github.com/RIP-LIP/fullstack-handbook' },
     ],
@@ -94,12 +94,13 @@ export default defineConfig({
       ],
       '/toolkit/': [
         {
-          text: '三个工具',
+          text: '工具怎么选',
           items: [
-            { text: '怎么分工', link: '/toolkit/index' },
+            { text: '总览', link: '/toolkit/index' },
             { text: '界面设计', link: '/toolkit/design' },
-            { text: '工程流程', link: '/toolkit/workflow' },
-            { text: '多 Agent 编排', link: '/toolkit/agents' },
+            { text: '实现功能', link: '/toolkit/build' },
+            { text: '保证它是对的', link: '/toolkit/quality' },
+            { text: '拆开并行', link: '/toolkit/parallel' },
           ],
         },
       ],
