@@ -75,23 +75,11 @@ export default defineConfig({
           text: '全栈手记',
           items: [
             { text: '写在开头', link: '/guide/intro' },
-            {
-              text: '🧰 准备',
-              collapsed: false,
-              items: [
-                { text: '第0章 先把环境配好', link: '/guide/setup' },
-                { text: '第0章续 动手前先知道这四件事', link: '/guide/basics' },
-              ],
-            },
-            {
-              text: '🟦 主线',
-              collapsed: false,
-              items: [
-                { text: '第1章 跑起来，看懂一次请求', link: '/guide/ch01' },
-                { text: '第2章 数据要留下来', link: '/guide/ch02' },
-                { text: '第3章 界面和数据不能各说各话', link: '/guide/ch03' },
-              ],
-            },
+            { text: '环境配置', link: '/guide/setup' },
+            { text: '基础概念', link: '/guide/basics' },
+            { text: '项目启动', link: '/guide/ch01' },
+            { text: '数据存储', link: '/guide/ch02' },
+            { text: '前端交互', link: '/guide/ch03' },
           ],
         },
       ],

@@ -27,9 +27,9 @@ docs/
   index.md            首页
   guide/              主线篇（线性）
     intro.md            写在开头
-    ch01.md             第1章 跑起来，看懂一次请求
-    ch02.md             第2章 数据要留下来
-    ch03.md             第3章 界面和数据不能各说各话
+    ch01.md             项目启动
+    ch02.md             数据存储
+    ch03.md             前端交互
   howto/              场景篇（按问题查）
     index.md
   reference/          速查

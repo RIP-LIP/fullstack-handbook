@@ -54,7 +54,7 @@ Git Bash、WSL、macOS、Linux 的 curl 没有这个问题。
 | `curl -i http://localhost:3001/api/health` | 直连后端 | 否 |
 | `curl -i http://localhost:5173/api/health` | 走代理 | 否 |
 
-**这两条 curl 的结果对照着看**，能一次定位是后端、代理还是路由的问题。对照表见 [第1章 常见误区](/guide/ch01#_9-常见误区)。
+**这两条 curl 的结果对照着看**，能一次定位是后端、代理还是路由的问题。对照表见 [项目启动 › 常见误区](/guide/ch01#_9-常见误区)。
 
 ## Git
 
@@ -62,7 +62,7 @@ Git Bash、WSL、macOS、Linux 的 curl 没有这个问题。
 | --- | --- | :-: |
 | `git status` | 看改了哪些文件 | 否 |
 | `git diff` | 看具体改了什么 | 否 |
-| `git checkout v0.1` | 回到第 1 章的代码状态 | 丢弃未提交改动 ⚠️ |
+| `git checkout v0.1` | 回到「项目启动」的代码状态 | 丢弃未提交改动 ⚠️ |
 | `git switch -c <名字>` | 开新分支 | 否 |
 | `git log --oneline` | 看提交历史 | 否 |
 
@@ -90,4 +90,4 @@ npm install      # 依赖可能变过，装一次
 - 数据库文件在哪：`apps/api/data/app.db`
 - 想清空重来：`npm run db:reset`，然后重启后端
 
-去 [主线第2章](/guide/ch02) 看数据到底存进哪了。
+去 [数据存储](/guide/ch02) 看数据到底存进哪了。
