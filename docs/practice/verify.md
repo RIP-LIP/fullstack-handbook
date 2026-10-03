@@ -12,10 +12,6 @@ title: 跑起来并验证
 
 ### 后端活着吗
 
-```bash
-curl -i http://localhost:4000/api/health
-```
-
 ::: request
 ```bash
 curl -i http://localhost:4000/api/health

@@ -97,7 +97,7 @@ npm install      # 依赖可能变过，装一次
 | `node scripts/backfill.mjs --batch=1000` | 分批补，每批一个事务 | ⚠️ 会改数据 |
 | `curl -X POST .../api/orders -d '{...}'` | 建一笔订单 | ⚠️ 建单 + **扣库存** |
 | `curl -X POST .../api/orders/1/transition -d '{"to":"paid"}'` | 走一次状态转移 | ⚠️ 会改数据 |
-| `docker compose up -d` | 起 PostgreSQL 容器（当前代码还没连它） | 只新建 `fullstack-backend-db` 这一个容器 |
+| `docker compose up -d` | 起 PostgreSQL 容器 | **v1.4 起后端连的就是它**，不先起它会连不上。只新建 `fullstack-backend-db` 这一个容器 |
 | `docker compose ps` | 看库的状态，看到 healthy 才算好 | 否 |
 | `docker compose down` | 停掉。加 `-v` 连数据卷一起删 | 否（加 `-v` 则 ⚠️ 删数据） |
 

@@ -46,7 +46,7 @@ title: 完整项目
 node -v
 ```
 
-**不用装任何依赖。** 后端用 Node 自带的 `node:http` 和 `node:sqlite`，前端是原生 ES module，没有 Vite、没有 React、没有 npm install。这个项目一共 6 个文件，`node_modules` 是空的。
+**不用装任何依赖。** 后端用 Node 自带的 `node:http` 和 `node:sqlite`，前端是原生 ES module，没有 Vite、没有 React、没有 npm install。这个项目一共 8 个文件，`node_modules` 是空的。
 
 ::: warning Node 版本
 `node:sqlite` 是 Node 22.5 才有的。如果你 `node -v` 出来低于 22.5，去 [环境配置](/guide/setup) 装 LTS。
