@@ -1,10 +1,15 @@
 # fullstack-handbook
 
-全栈入门教程。用一个任务清单应用，从空目录走到前后端跑通。
+全栈教程。两条轴：主线用任务清单从空目录走到前后端跑通，「后端往下走」用订单/库存讲外键、迁移、事务、并发、幂等。
 
 **教程地址**：https://rip-lip.github.io/fullstack-handbook/
 
-代码在 **[fullstack-todo-app](https://github.com/RIP-LIP/fullstack-todo-app)**，本仓库只有文档。
+本仓库只有文档，代码在两个仓：
+
+| 仓 | 对应 |
+| --- | --- |
+| **[fullstack-todo-app](https://github.com/RIP-LIP/fullstack-todo-app)** | 主线三章，端口 3001 |
+| **[fullstack-backend](https://github.com/RIP-LIP/fullstack-backend)** | 后端往下走 ch04–ch09，端口 3002，PostgreSQL |
 
 ## 本地预览
 
@@ -45,6 +50,14 @@ docs/
     ch01.md             项目启动
     ch02.md             数据存储
     ch03.md             前端交互
+    deep/               后端往下走（第二条轴，配 fullstack-backend）
+      index.md            这一组讲什么
+      ch04.md             数据模型
+      ch05.md             迁移
+      ch06.md             零停机变更
+      ch07.md             事务
+      ch08.md             换 PostgreSQL
+      ch09.md             幂等
   practice/           实践篇
     index.md            完整项目：一个书签应用（零依赖，8 个文件）
   toolkit/            工具篇
@@ -64,53 +77,6 @@ docs/
 scripts/
   check-links.mjs     站内锚点 / 静态资源检查
 ```
-
-## 写作规范
-
-改内容前先读这几条：
-
-- 标题说人话，读者扫一眼能决定要不要点开
-- 开头第一句给具体事实，禁「众所周知」「随着……的发展」
-- 每个方案主动讲缺点
-- 命令要说明它会改动什么
-- 排障只给顺序，不给零散技巧
-- 时效性数据标具体日期，能删就删
-- **禁止自我标榜句**（「我们只讲 X 不讲 Y」「这份教程解决什么」这类）
-- **禁止把计划写进产物**——没有「待写」「待补」「接下来会写」这类字样。读者看到的是做好的东西，不是施工图。范围没覆盖到的地方就不提，别在页面上挂个占位
-- **命令和响应必须是实跑的**。凭印象编的示例比没有更糟
-
-`config.mts` 没有 `ignoreDeadLinks`，死链检查是严格模式。**新增页面后要同步改三处导航**（侧边栏、首页目录、顶栏），漏一处构建就会失败。
-
-## 加一章
-
-1. 建 `docs/guide/chNN.md`
-2. 在 `config.mts` 的 `sidebar['/guide/']` 加一条
-3. 在 `docs/index.md` 的主线表格加一行
-4. 如果代码有变化，在 `fullstack-todo-app` 打对应 tag
-5. 写完跑 `npm run build`，构建会检查死链
-
-**三处导航必须同步**（侧边栏、首页目录、顶栏）。最常见的事故是侧边栏加了新页、首页忘了更新。
-
-## 请求面板
-
-章节里左右对照的「命令 / 响应」用法：
-
-````markdown
-::: request
-```bash
-curl -i http://localhost:3001/api/health
-```
-
-```http
-HTTP/1.1 200 OK
-Content-Type: application/json
-
-{"ok":true,"service":"api"}
-```
-:::
-````
-
-第一个代码块渲染成左栏，第二个渲染成右栏。**右栏的内容必须是真跑出来的**，不要凭印象编。
 
 ## 许可
 
