@@ -43,6 +43,17 @@ npm install
 npm run dev:api
 ```
 
+::: warning v1.4 起要先起 PostgreSQL
+`v1.0`–`v1.3` 用的是 SQLite，`npm run dev:api` 直接就能跑。
+`v1.4`（[换 PostgreSQL](/guide/deep/ch08)）起底层换成了 PostgreSQL，
+直接起会连不上。先起库、等它 ready：
+
+```bash
+docker compose up -d
+docker compose ps        # 看到 healthy 才算好
+```
+:::
+
 `verify-tag.mjs` 能证明任何一个 tag 都能被别人独立跑起来——它把 tag 导出到临时目录、装依赖、跑测试、起服务探健康，跑不通就退出 1：
 
 ```bash
